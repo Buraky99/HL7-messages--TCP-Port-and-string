@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A04C1AE5-0924-4A6C-B2A6-AB89ACC17048}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Server\ServerHL7.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Client\ClientHL7.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ServerHL7">
+        <MSBuild Projects="Server\ServerHL7.dproj"/>
+    </Target>
+    <Target Name="ServerHL7:Clean">
+        <MSBuild Projects="Server\ServerHL7.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ServerHL7:Make">
+        <MSBuild Projects="Server\ServerHL7.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ClientHL7">
+        <MSBuild Projects="Client\ClientHL7.dproj"/>
+    </Target>
+    <Target Name="ClientHL7:Clean">
+        <MSBuild Projects="Client\ClientHL7.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClientHL7:Make">
+        <MSBuild Projects="Client\ClientHL7.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ServerHL7;ClientHL7"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ServerHL7:Clean;ClientHL7:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ServerHL7:Make;ClientHL7:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
